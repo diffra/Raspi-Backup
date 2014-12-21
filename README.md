@@ -23,9 +23,9 @@ That looks like this:
     # m h  dom mon dow   command
     00 03 * * 1 /path/to/backup.sh
 
-Then set the backup location at the top of the script, and it will run early monday morning, emailing you a report.
+Then set the backup location at the top of the script, and it will run early monday morning, emailing you a report. You want to run it late at night as any services (webserver, ssh, etc.) will be down while it takes the snapshot.  The services are then restarted, then it gzips the SD card image to use less space.
 
-Make sure to update the list of services to be stopped to include anything you're running that may write to the SD card.
+*Make sure to update the list of services to be stopped to include anything you're running that may write to the SD card.*
 
 While you're here, check out my other Pi related repositories:
 

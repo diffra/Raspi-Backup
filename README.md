@@ -9,7 +9,11 @@ Backs up image of the SD card to an external HDD/thumb drive
 
 **To configure:**
 
-Add an entry to your root crontab:
+Copy this repository:
+
+    git clone https://github.com/diffra/Raspi-Backup.git
+
+Then add an entry to your root crontab:
 
     sudo crontab -e
 
@@ -19,7 +23,7 @@ That looks like this:
     # m h  dom mon dow   command
     00 03 * * 1 /path/to/backup.sh
 
-Then set the backup location at the top of the script, and it will run early monday morning.
+Then set the backup location at the top of the script, and it will run early monday morning, emailing you a report.
 
 Make sure to update the list of services to be stopped to include anything you're running that may write to the SD card.
 

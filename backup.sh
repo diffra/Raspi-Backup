@@ -74,7 +74,7 @@ fi;
 if [ $RESULT = 0 ];
    then
       echo "Successful backup, previous backup files will be deleted."
-      rm -f $DIR/backup_*.tar.gz
+      rm -f $DIR/backup_*.gz
       mv $OFILE $OFILEFINAL
       echo "Backup is being gzipped. Please wait..."
       gzip $OFILEFINAL

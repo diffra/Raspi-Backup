@@ -3,11 +3,13 @@ Raspi-Backup
 
 Simple Raspberry pi backup script.
 
-Shuts down all running services and disables swap to prevent writes.
+Temporarily shuts down all running services and disables swap to prevent writes.
 
 Backs up image of the SD card to an external HDD/thumb drive
 
-To configure, add an entry to your root crontab:
+*To configure:*
+
+Add an entry to your root crontab:
 
     sudo crontab -e
 

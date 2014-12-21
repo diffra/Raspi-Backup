@@ -20,3 +20,9 @@ That looks like this:
 Then set the backup location at the top of the script, and it will run early monday morning.
 
 Make sure to update the list of services to be stopped to include anything you're running that may write to the SD card.
+
+While you're here, check out my other Pi related repositories:
+
+https://github.com/diffra/pitweetbot
+
+https://github.com/diffra/RaspberryHome

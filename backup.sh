@@ -32,6 +32,16 @@ do
   /etc/init.d/$svc stop
 done
 
+#kill emulationstation, if running
+es=$(pgrep emulationstation)
+if [ ! -z "$es" ]; then
+   kill `pidof emulationstation`;
+fi;
+
+
+#disable swap
+dphys-swapfile swapoff
+
 # First sync disks
 sync; sync
 
@@ -47,11 +57,18 @@ RESULT=$?
 # Start services again that where shutdown before backup process
 echo "Start the stopped services again."
 
+#re-enable swap
+dphys-swapfile swapon
+
 for svc in $SERVICES
 do
   /etc/init.d/$svc start
 done
 
+#if it was running, re-enable emulationstation
+if [ ! -z "$es" ]; then
+   emulationstation &;
+fi;
 
 # If command has completed successfully, delete previous backups and exit
 if [ $RESULT = 0 ];
@@ -59,9 +76,8 @@ if [ $RESULT = 0 ];
       echo "Successful backup, previous backup files will be deleted."
       rm -f $DIR/backup_*.tar.gz
       mv $OFILE $OFILEFINAL
-      echo "Backup is being tarred. Please wait..."
-      tar zcf $OFILEFINAL.tar.gz $OFILEFINAL
-      rm -rf $OFILEFINAL
+      echo "Backup is being gzipped. Please wait..."
+      gzip $OFILEFINAL
       echo "RaspberryPI backup process completed! FILE: $OFILEFINAL.tar.gz"
       exit 0
 # Else remove attempted backup file

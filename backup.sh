@@ -11,6 +11,20 @@ DIR=/media/backups/
 # Services to pause
 SERVICES="php5-fpm bitlbee mysql nginx unbound cron samba vsftpd ssh vncserver"
 
+# Checks if pv is installed
+isPvInstalled() {
+PACKAGESTATUS=`dpkg -s pv | grep Status`;
+ 
+if [[ $PACKAGESTATUS == S* ]]
+   then
+      echo "$project Package 'pv' is installed."
+   else
+      echo "$project Package 'pv' is NOT installed."
+      echo "$project Installing package 'pv'. Please wait..."
+      apt-get -y install pv
+fi
+isPvInstalled
+
 echo "Starting RaspberryPI backup process!"
 
 # Check if backup directory exists
